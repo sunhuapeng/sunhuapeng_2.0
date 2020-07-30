@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 14:35:02
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-30 14:36:14
+ * @LastEditTime: 2020-07-30 18:41:15
 -->
 <template>
   <div class="home">
@@ -16,4 +16,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import './style.scss';
+</style>

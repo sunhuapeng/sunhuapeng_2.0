@@ -2,30 +2,30 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 14:32:15
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-30 14:34:05
+ * @LastEditTime: 2020-07-30 16:09:39
  */ 
 
 const state = {
-  fileList: null
+  loading: null
 }
 
 // getters
 const getters = {
-  fileList: state => state.fileList
+  loading: state => state.loading
 }
 
 // actions
 const actions = {
-  fileList({ commit }, obj) {
-    commit('fileList', obj)
+  loading({ commit }, obj) {
+    commit('loading', obj)
   }
 }
 
 // mutations
 const mutations = {
   // data 载荷
-  fileList(state, data) {
-    state.fileList = data
+  loading(state, data) {
+    state.loading = data
   }
 }
 
