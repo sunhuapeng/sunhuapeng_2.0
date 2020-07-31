@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-31 09:37:51
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 10:48:27
+ * @LastEditTime: 2020-07-31 14:36:48
 -->
 /* * @Author: sunhuapeng * @Date: 2020-07-31 09:37:51 * @LastEditors: sunhuapeng
 * @LastEditTime: 2020-07-31 09:37:52 */
@@ -10,10 +10,12 @@
   <div class="nav">
     <ul>
       <li
-        class="nav-li"
+        class="nav-li skewX"
+        :class="getNavdeepstyle ? 'nav-deep' : 'nav-light'"
         v-for="nav in navList"
         :key="nav.id"
         v-show="nav.path !== $route.path"
+        @click="toRoute(nav.path)"
       >
         <div class="nav-item">
           <div class="left-corner">
@@ -33,6 +35,7 @@
 export default {
   data() {
     return {
+      navStyle: "light",
       navList: [
         {
           path: "/home",
@@ -47,15 +50,25 @@ export default {
         {
           path: "/demo",
           name: "个案分析",
-          id: "2",
+          id: "3",
         },
         {
           path: "/about",
           name: "关于网站",
-          id: "3",
+          id: "4",
         },
       ],
     };
+  },
+  methods: {
+    toRoute(path) {
+      this.$router.push(path);
+    },
+  },
+  computed: {
+    getNavdeepstyle() {
+      return this.$store.getters["navdeepstyle"];
+    },
   },
 };
 </script>

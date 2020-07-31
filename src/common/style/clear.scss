@@ -148,17 +148,28 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+html,body {
+  min-width: 1440px;
+}
 html,body,div{
   height: 100%;
   font-family: hwzs;
   font-size: 16px;
-  color: #191919;
+  color: #383738;
 }
 .l{
   float: left;
 }
 .r{
   float:right
+}
+.w{
+  width: 960px;
+  margin: 0 auto;
+}
+
+.skewX:hover {
+  transform: skewX(-10deg);
 }
 
 @font-face {

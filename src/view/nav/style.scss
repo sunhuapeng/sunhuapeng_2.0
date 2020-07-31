@@ -3,24 +3,18 @@
   position: fixed;
   right: 28px;
   top: 28px;
+  z-index: 1;
 }
 .nav-li {
   width: 120px;
   height: 40px;
-  background: #cccccc;
   position: relative;
   line-height: 40px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.06s linear 0s;
-  &:hover {
-    transform: skewX(-10deg);
-  }
-  &~&{
-    margin-top: 28px;
-  }
-  .nav-text {
-    color: #060606;
+  &{
+    margin-bottom: 28px;
   }
 }
 .left-corner,
@@ -28,9 +22,7 @@
   position: absolute;
   width: 12px;
   height: 12px;
-  background: #060606;
   & > div {
-    background: #cccccc;
     width: 12px;
     height: 12px;
     position: absolute;
@@ -50,5 +42,32 @@
   & > div {
     left: -4px;
     top: -4px;
+  }
+}
+
+.nav-light {
+  background: #cccccc;
+  .nav-text {
+    color: #383738;
+  }
+  .left-corner,
+  .right-corner {
+    background: #383738;
+    & > div {
+      background: #cccccc;
+    }
+  }
+}
+.nav-deep{
+  background: #323232;
+  .nav-text {
+    color: #ffffff;
+  }
+  .left-corner,
+  .right-corner {
+    background: #ffffff;
+    & > div {
+      background: #323232;
+    }
   }
 }

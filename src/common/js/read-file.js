@@ -2,17 +2,24 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 13:34:27
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-30 15:10:15
+ * @LastEditTime: 2020-07-31 16:35:05
  */
 import axios from "axios";
+import Vue from "vue";
 class ReadFile {
   fileList = [];
+  filenameList = [];
   tag = "";
-  constructor(tag) {
-    this.tag = tag;
-    const filenameList = require.context("../../../public/md", true, /.(md)$/).keys();
-    if( filenameList.length!==0 ) {
-      filenameList.forEach((filename) => {
+  callback = null;
+  constructor() {}
+  init(callback) {
+    this.fileList = [];
+    this.callback = callback;
+    this.filenameList = require
+      .context("../../../public/md", true, /.(md)$/)
+      .keys();
+    if (this.filenameList.length !== 0) {
+      this.filenameList.forEach((filename, index) => {
         let file = filename.slice(2);
         this.getFile(file);
       });
@@ -40,12 +47,37 @@ class ReadFile {
         // 文章图片
         coverPng: dom.getElementsByClassName("coverPic")[0].innerHTML || "",
         // 文章案例
-        case: dom.getElementsByClassName("case")[0] || "",
-        id: dom.getElementsByClassName("id")[0] || "",
+        case: dom.getElementsByClassName("case")[0].innerHTML || "",
+        id: dom.getElementsByClassName("id")[0].innerHTML || "",
         fileName: file,
       };
       this.fileList.push(Item);
+      if (this.callback) {
+        this.callback(this.fileList);
+      }
     });
+  }
+  getArticleByTag(tag) {
+    let articleList = [];
+    if (tag) {
+      this.fileList.find((item) => {
+        if (item.tag === tag) {
+          articleList.push(item);
+        }
+      });
+    } else {
+      articleList = this.fileList;
+    }
+    return articleList;
+  }
+  getArticleById(id) {
+    let file = null;
+    this.fileList.find((item) => {
+      if (item.id === id) {
+        file = item;
+      }
+    });
+    return file;
   }
 }
 

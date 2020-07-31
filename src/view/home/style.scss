@@ -1,4 +1,15 @@
 .home{
   height: 100%;
   background: #e9e9e9;
+  position: relative;
+  img.my-name{
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: calc(100% - 480px);
+  }
 }

@@ -2,11 +2,11 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 14:35:02
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-30 18:41:15
+ * @LastEditTime: 2020-07-31 11:09:48
 -->
 <template>
   <div class="home">
-    首页
+    <img src="../../assets/image/my-name.png" alt="" class="my-name">
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
 };
 </script>
 
-<style>
-@import './style.scss';
+<style lang="scss" scoped>
+@import "./style.scss";
 </style>
+

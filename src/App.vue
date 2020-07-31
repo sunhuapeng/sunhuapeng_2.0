@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 12:57:46
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 09:49:15
+ * @LastEditTime: 2020-07-31 13:17:41
 -->
 <template>
   <div id="app">
@@ -15,12 +15,11 @@
 </template>
 
 <script>
-import ReadFile from "@/common/js/read-file.js";
-import navBar from './view/nav/index.vue'
+import navBar from "./view/nav/index.vue";
 export default {
   name: "App",
   components: {
-    navBar
+    navBar,
   },
   data() {
     return {

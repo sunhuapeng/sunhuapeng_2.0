@@ -1,0 +1,85 @@
+.article-list {
+  background: #191919;
+}
+.article-class {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  li {
+    padding: 8px 18px;
+    border-radius: 4px;
+    margin-right: 18px;
+    cursor: pointer;
+    background: #323232;
+    color: #ffffff;
+    &.active-articleClass{
+      background: #e9e9e9;
+      color: #383738;
+    }
+    &:hover {
+      background: #e9e9e9;
+      color: #383738;
+    }
+  }
+}
+.list-contnet {
+  height: calc(100% - 64px);
+  background: #e9e9e9;
+  overflow: hidden;
+  .scroll-main {
+    padding: 28px;
+    padding-right: 44px;
+    box-sizing: border-box;
+    width: calc(100% + 16px);
+    height: 100%;
+    overflow-y: auto;
+    &>li{
+      padding: 10px 0;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ccc;
+    }
+    p.title {
+      line-height: 27px;
+      font-size: 26px;
+      color: #323232;
+      cursor: pointer;
+    }
+    p.abstract {
+      margin: 8px 0 8px;
+      font-size: 13px;
+      line-height: 24px;
+      color: #999;
+      min-height: 85px;
+    }
+    div.article-detail {
+      display: flex;
+      .article-content {
+        padding: 0 28px 0 0;
+        flex: 1;
+      }
+      .img {
+        width: 165px;
+        overflow: hidden;
+        position: relative;
+        height: 165px;
+        img {
+          width: 100%;
+          display: inline-block;
+          margin: auto;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+        }
+      }
+      .date {
+        font-size: 14px;
+        color: #999;
+      } 
+      .author{
+        margin-top: 8px;
+      }
+    }
+  }
+}
