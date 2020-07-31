@@ -1,6 +1,4 @@
-html,body,body div{
-  height: 100%;
-}
+
 html,
 body,
 div,
@@ -150,9 +148,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+html,body,div{
+  height: 100%;
+  font-family: hwzs;
+  font-size: 16px;
+  color: #191919;
+}
 .l{
   float: left;
 }
 .r{
   float:right
+}
+
+@font-face {
+  font-family: hwzs;//自定义字体名称
+  src: url(../font/hwzs.ttf)
 }

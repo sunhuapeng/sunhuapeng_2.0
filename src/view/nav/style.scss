@@ -1,0 +1,54 @@
+.nav {
+  height: auto;
+  position: fixed;
+  right: 28px;
+  top: 28px;
+}
+.nav-li {
+  width: 120px;
+  height: 40px;
+  background: #cccccc;
+  position: relative;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.06s linear 0s;
+  &:hover {
+    transform: skewX(-10deg);
+  }
+  &~&{
+    margin-top: 28px;
+  }
+  .nav-text {
+    color: #060606;
+  }
+}
+.left-corner,
+.right-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #060606;
+  & > div {
+    background: #cccccc;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+  }
+}
+.left-corner {
+  left: -2px;
+  top: -2px;
+  & > div {
+    left: 4px;
+    top: 4px;
+  }
+}
+.right-corner {
+  right: -2px;
+  bottom: -2px;
+  & > div {
+    left: -4px;
+    top: -4px;
+  }
+}
