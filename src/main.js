@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 12:57:46
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 15:58:25
+ * @LastEditTime: 2020-07-31 17:40:26
  */ 
 import Vue from 'vue'
 import App from './App.vue'
