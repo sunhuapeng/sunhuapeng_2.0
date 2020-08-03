@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-31 15:37:37
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-08-03 15:07:14
+ * @LastEditTime: 2020-08-03 16:02:48
 -->
 <template>
   <div class="article-detail">
@@ -37,6 +37,7 @@ Vue.directive("highlight", function(el) {
 });
 
 export default {
+  name: 'artdetail',
   data() {
     return {
       articleId: "",

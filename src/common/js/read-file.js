@@ -2,10 +2,9 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 13:34:27
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-08-03 08:55:24
+ * @LastEditTime: 2020-08-03 16:49:43
  */
 import axios from "axios";
-import Vue from "vue";
 class ReadFile {
   fileList = [];
   filenameList = [];
@@ -18,15 +17,15 @@ class ReadFile {
     this.filenameList = require
       .context("../../../public/md", true, /.(md)$/)
       .keys();
-      console.log(this.filenameList)
     if (this.filenameList.length !== 0) {
-      this.filenameList.forEach((filename, index) => {
+      for (let i = 0; i < this.filenameList.length; i++) {
+        let filename = this.filenameList[i];
         let file = filename.slice(2);
-        this.getFile(file);
-      });
+        this.getFile(file, i === this.filenameList.length - 1);
+      }
     }
   }
-  getFile(file) {
+  getFile(file, last) {
     axios.get(`md/${file}`).then((res) => {
       let Item,
         dom = document.createElement("div");
@@ -53,9 +52,13 @@ class ReadFile {
         fileName: file,
       };
       this.fileList.push(Item);
+      this.fileList.sort((a,b)=>{
+        return Number(b.date) - Number(a.date)
+      })
       if (this.callback) {
-        console.log(this.fileList)
-        this.callback(this.fileList);
+        if (last) {
+          this.callback(this.fileList);
+        }
       }
     });
   }
@@ -63,7 +66,8 @@ class ReadFile {
     let articleList = [];
     if (tag) {
       this.fileList.find((item) => {
-        if (item.tag === tag) {
+        const tagArr = item.tag.split("|");
+        if (tagArr.indexOf(tag) !== -1) {
           articleList.push(item);
         }
       });

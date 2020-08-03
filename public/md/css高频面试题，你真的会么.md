@@ -2,7 +2,7 @@
     <p class="name" style="display:none;">css高频面试题，你真的会么</p>
 </html>
 <html>
-    <p class="tag" style="display:none;">笔记</p>
+    <p class="tag" style="display:none;">笔记|转载</p>
 </html>
 <html>
     <p class="coverPic" style="display:none;">https://s2.ax1x.com/2019/11/25/MjZ9pV.jpg</p>

@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-31 11:24:54
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-08-03 08:55:09
+ * @LastEditTime: 2020-08-03 16:38:11
 -->
 <template>
   <div class="article-list">
@@ -43,9 +43,10 @@
 import ReadFile from "@/common/js/read-file.js";
 
 export default {
+  name: 'art-list',
   data() {
     return {
-      articleClassList: ["全部", "前端", "笔记", "Three.js", "小记", "摘文"],
+      articleClassList: ["全部", "前端", "笔记", '3D', "小记", "美文", '转载', '原创'],
       articleList: [],
       readFile: [],
       activeTag: "",
@@ -54,7 +55,6 @@ export default {
   mounted() {
     this.articleList = []
     this.$readFile.init((list) => {
-      console.log(list)
       this.articleList = list;
     });
   },

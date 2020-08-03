@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 12:57:46
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-08-03 15:51:13
+ * @LastEditTime: 2020-08-03 16:04:14
 -->
 <template>
   <div id="app">
@@ -10,7 +10,9 @@
       <Loading v-if="showLoading"></Loading>
     </transition>
     <nav-bar v-if="$route.path !== '/articledetail'"></nav-bar>
-    <router-view></router-view>
+    <keep-alive :include="keepList">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -24,13 +26,14 @@ export default {
   data() {
     return {
       showLoading: false,
+      keepList: ["art-list"],
     };
   },
   mounted() {
     this.$loading.open();
-    document.onreadystatechange = ()=> {
+    document.onreadystatechange = () => {
       if (document.readyState == "complete") {
-        console.log('加载完毕')
+        console.log("加载完毕");
         this.$loading.close();
       }
     };

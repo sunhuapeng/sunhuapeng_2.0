@@ -2,7 +2,7 @@
     <p class="name" style="display:none;">css选择器练习·动态五星好评</p>
 </html>
 <html>
-    <p class="tag" style="display:none;">前端</p>
+    <p class="tag" style="display:none;">前端|原创</p>
 </html>
 <html>
     <p class="coverPic" style="display:none;">https://s2.ax1x.com/2019/11/13/MGZaoF.jpg</p>
