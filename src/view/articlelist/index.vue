@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-31 11:24:54
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 16:23:34
+ * @LastEditTime: 2020-08-03 08:55:09
 -->
 <template>
   <div class="article-list">
@@ -54,6 +54,7 @@ export default {
   mounted() {
     this.articleList = []
     this.$readFile.init((list) => {
+      console.log(list)
       this.articleList = list;
     });
   },

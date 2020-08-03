@@ -2,14 +2,14 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 12:57:46
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 13:17:41
+ * @LastEditTime: 2020-08-03 09:23:33
 -->
 <template>
   <div id="app">
     <transition name="loading">
       <Loading v-if="showLoading"></Loading>
     </transition>
-    <nav-bar></nav-bar>
+    <nav-bar v-if="$route.path!=='/articledetail'"></nav-bar>
     <router-view></router-view>
   </div>
 </template>

@@ -2,7 +2,7 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 13:34:27
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 16:35:05
+ * @LastEditTime: 2020-08-03 08:55:24
  */
 import axios from "axios";
 import Vue from "vue";
@@ -18,6 +18,7 @@ class ReadFile {
     this.filenameList = require
       .context("../../../public/md", true, /.(md)$/)
       .keys();
+      console.log(this.filenameList)
     if (this.filenameList.length !== 0) {
       this.filenameList.forEach((filename, index) => {
         let file = filename.slice(2);
@@ -53,6 +54,7 @@ class ReadFile {
       };
       this.fileList.push(Item);
       if (this.callback) {
+        console.log(this.fileList)
         this.callback(this.fileList);
       }
     });

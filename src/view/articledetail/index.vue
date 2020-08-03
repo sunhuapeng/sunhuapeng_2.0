@@ -2,12 +2,17 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-31 15:37:37
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-07-31 16:36:08
+ * @LastEditTime: 2020-08-03 15:07:14
 -->
 <template>
   <div class="article-detail">
-    文章内容
+    <div class="article-title">
+      <div class="article-title-main w">
+        <div class="art-name-area"><p class="art-name" v-text="articleName"></p></div>
+      </div>
+    </div>
     <mavon-editor
+      class="w"
       v-if="article"
       v-html="article"
       :subfield="false"
@@ -42,6 +47,7 @@ export default {
     };
   },
   mounted() {
+    this.$loading.open()
     this.$readFile.init(() => {
       this.articleId = this.$route.query.id;
       this.articleObj = this.$readFile.getArticleById(this.articleId);
@@ -53,14 +59,17 @@ export default {
   },
   methods: {
     getArticleDetail() {
-      // this.articleName;
-      console.log(this.articleId)
       import(`../../../public/md/${this.articleName}.md`).then((res) => {
-        console.log(res);
+        this.article = res.default
+        this.$nextTick(()=>{
+          this.$loading.close()
+        })
       });
     },
   },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import './style.scss';
+</style>
