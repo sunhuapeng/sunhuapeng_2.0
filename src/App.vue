@@ -2,14 +2,14 @@
  * @Author: sunhuapeng
  * @Date: 2020-07-30 12:57:46
  * @LastEditors: sunhuapeng
- * @LastEditTime: 2020-08-03 09:23:33
+ * @LastEditTime: 2020-08-03 15:51:13
 -->
 <template>
   <div id="app">
     <transition name="loading">
       <Loading v-if="showLoading"></Loading>
     </transition>
-    <nav-bar v-if="$route.path!=='/articledetail'"></nav-bar>
+    <nav-bar v-if="$route.path !== '/articledetail'"></nav-bar>
     <router-view></router-view>
   </div>
 </template>
@@ -27,6 +27,13 @@ export default {
     };
   },
   mounted() {
+    this.$loading.open();
+    document.onreadystatechange = ()=> {
+      if (document.readyState == "complete") {
+        console.log('加载完毕')
+        this.$loading.close();
+      }
+    };
     // new ReadFile();
     // this.$loading.open()
     // setTimeout(()=>{
