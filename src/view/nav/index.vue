@@ -57,6 +57,16 @@ export default {
           name: "关于网站",
           id: "4",
         },
+        {
+          path: "/gamemaze",
+          name: "迷宫游戏",
+          id: "5",
+        },
+        {
+          path: "/market",
+          name: "商场3D案例",
+          id: "6",
+        },
       ],
     };
   },

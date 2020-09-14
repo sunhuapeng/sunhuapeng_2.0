@@ -9,7 +9,7 @@
     <transition name="loading">
       <Loading v-if="showLoading"></Loading>
     </transition>
-    <nav-bar v-if="$route.path !== '/articledetail'"></nav-bar>
+    <nav-bar v-show="noNav.indexOf($route.path)===-1"></nav-bar>
     <keep-alive :include="keepList">
       <router-view></router-view>
     </keep-alive>
@@ -27,6 +27,7 @@ export default {
     return {
       showLoading: false,
       keepList: ["art-list"],
+      noNav: ['/articledetail', '/market', '/gamemaze']
     };
   },
   mounted() {

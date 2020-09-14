@@ -12,6 +12,8 @@ import BeforeEach from "./beforeEach.js";
 const home = () => import("@/view/home/index.vue");
 const articlelist = () => import("@/view/articlelist/index.vue");
 const articleDetail = () => import("@/view/articledetail/index.vue");
+const market = () => import("@/view/market/index.vue");
+const gamemaze = () => import("@/view/game-maze/index.vue");
 Vue.use(Router);
 
 const router = new Router({
@@ -40,6 +42,22 @@ const router = new Router({
         deep: false,
       },
       component: articleDetail,
+    },
+    {
+      path: "/market",
+      name: "market",
+      meta: {
+        deep: false,
+      },
+      component: market,
+    },
+    {
+      path: "/gamemaze",
+      name: "gamemaze",
+      meta: {
+        deep: false,
+      },
+      component: gamemaze,
     },
     {
       path: "*",
