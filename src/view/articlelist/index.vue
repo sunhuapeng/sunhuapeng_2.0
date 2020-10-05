@@ -6,7 +6,11 @@
 -->
 <template>
   <div class="article-list">
-    <ul class="article-class w">
+    <div class="acticle-icon" @click="openTag" :class="{open: isopen}">
+      <div class="up-line"></div>
+      <div class="down-line"></div>
+    </div>
+    <ul class="article-class w" :id="isopen?'article-tag-show':'article-tag-hide'">
       <li
         v-for="aclass in articleClassList"
         :key="aclass"
@@ -25,9 +29,10 @@
           ></p>
           <div class="article-detail">
             <div class="article-content">
+              
               <p class="abstract" v-text="data.brief"></p>
+              <p class="tags date">{{getTag(data.tag)}}</p>
               <p class="date">{{ $formatDate(Number(data.date)) }}</p>
-              <p class="date author">{{ data.author }}</p>
             </div>
             <div class="img">
               <img :src="data.coverPng" alt="" />
@@ -50,6 +55,7 @@ export default {
       articleList: [],
       readFile: [],
       activeTag: "",
+      isopen: false
     };
   },
   mounted() {
@@ -59,6 +65,10 @@ export default {
     });
   },
   methods: {
+    getTag (tags) {
+      let arr = tags.split('|')
+      return arr.join(' ')
+    },
     getArticleList(tag) {
       this.activeTag = tag;
       this.articleList = this.$readFile.getArticleByTag(
@@ -73,6 +83,9 @@ export default {
         }
       });
     },
+    openTag(){
+      this.isopen = !this.isopen
+    }
   },
 };
 </script>

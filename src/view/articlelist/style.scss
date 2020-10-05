@@ -1,5 +1,5 @@
 .article-list {
-  background: #191919;
+  background:#f7f7f7;
   height: 100%;
 }
 .article-class {
@@ -25,7 +25,7 @@
 }
 .list-contnet {
   height: calc(100% - 64px);
-  background: #e9e9e9;
+  background: #ffffff;
   overflow: hidden;
   .scroll-main {
     padding: 28px;
@@ -58,11 +58,14 @@
         padding: 0 28px 0 0;
         flex: 1;
       }
+      .tags{
+        margin-bottom: 12px;
+      }
       .img {
-        width: 165px;
+        width: 266px;
         overflow: hidden;
         position: relative;
-        height: 165px;
+        height: 150px;
         img {
           width: 100%;
           display: inline-block;
@@ -83,4 +86,34 @@
       }
     }
   }
+}
+.acticle-icon{
+  width: 24px;
+  height: 32px;
+  display: none;
+  overflow: hidden;
+  margin-left: 24px;
+  &>div{
+    transition: all 0.3s linear 0s;
+  }
+  &.open {
+    &>div{
+      transition: all 0.3s linear 0s;
+    }
+    &>div:first-child{
+      transform: rotate(45deg) translate(4px, 5px)
+    }
+    &>div:last-child{
+      transform: rotate(-45deg) translate(2px, -4px);
+    }
+  }
+  &>div {
+    width: 100%;
+    height: 3px;
+    background: #383738;
+    margin: 8px 0; 
+  }
+}
+#article-tag-hide li{
+  margin-right: 18px;
 }

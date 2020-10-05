@@ -6,6 +6,7 @@
  */
 
 import Store from "@/store";
+import { webOrphone } from '../until/index'
 export default class BeforeEach {
   router = null;
   constructor(router) {
@@ -16,6 +17,14 @@ export default class BeforeEach {
     this.router.beforeEach((to, from, next) => {
       if (to.meta.deep) Store.dispatch("navdeepstyle", true);
       else Store.dispatch("navdeepstyle", false);
+      if (to.path === '/gamemaze') {
+        // 判断是否是移动端
+        if (webOrphone()) {
+          next('/error')
+        } else {
+          next()
+        }
+      }
       next();
     });
   }

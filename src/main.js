@@ -17,6 +17,8 @@ import '@/common/js/component-views.js'
 import '@/common/style/clear.scss'
 // 动画样式
 import '@/common/style/animation.scss'
+// 媒体查询
+import '@/common/style/media.scss'
 // 公共方法抽离
 import global from './global'
 Vue.config.productionTip = false

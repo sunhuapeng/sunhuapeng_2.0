@@ -14,14 +14,16 @@ const articlelist = () => import("@/view/articlelist/index.vue");
 const articleDetail = () => import("@/view/articledetail/index.vue");
 const market = () => import("@/view/market/index.vue");
 const gamemaze = () => import("@/view/game-maze/index.vue");
+const error = () => import("@/view/error/index.vue");
+
 Vue.use(Router);
 
 const router = new Router({
-  mode: "history",
   routes: [
     {
-      path: "/home",
-      name: "home",
+      path: "/",
+      name: "articlelist",
+      redirect: "/articlelist",
       meta: {
         deep: false,
       },
@@ -58,10 +60,14 @@ const router = new Router({
         deep: false,
       },
       component: gamemaze,
+    },{
+      path: '/error',
+      name: 'error',
+      component: error
     },
     {
       path: "*",
-      redirect: "/home",
+      redirect: "/articlelist",
     },
   ],
 });

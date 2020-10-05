@@ -6,7 +6,7 @@
 -->
 <template>
   <div class="home">
-    <img src="../../assets/image/my-name.png" alt="" class="my-name">
+    <!-- <img src="../../assets/image/my-name.png" alt="" class="my-name"> -->
   </div>
 </template>
 
@@ -17,6 +17,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./style.scss";
+// @import "./style.scss";
 </style>
 

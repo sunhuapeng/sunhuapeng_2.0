@@ -18,13 +18,7 @@
         @click="toRoute(nav.path)"
       >
         <div class="nav-item">
-          <div class="left-corner">
-            <div></div>
-          </div>
           <div class="nav-text" v-text="nav.name"></div>
-          <div class="right-corner">
-            <div></div>
-          </div>
         </div>
       </li>
     </ul>
@@ -38,34 +32,23 @@ export default {
       navStyle: "light",
       navList: [
         {
-          path: "/home",
-          name: "回到首页",
+          path: "/articlelist",
+          name: "文章分类",
           id: "1",
         },
         {
-          path: "/articlelist",
-          name: "文章分类",
-          id: "2",
-        },
-        {
           path: "/demo",
-          name: "个案分析",
+          name: "前端案例",
           id: "3",
-        },
-        {
-          path: "/about",
-          name: "关于网站",
-          id: "4",
         },
         {
           path: "/gamemaze",
           name: "迷宫游戏",
-          id: "5",
-        },
-        {
+          id: "3",
+        },{
           path: "/market",
-          name: "商场3D案例",
-          id: "6",
+          name: "商场模型",
+          id: "3",
         },
       ],
     };
