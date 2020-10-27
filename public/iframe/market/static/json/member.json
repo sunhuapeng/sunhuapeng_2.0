@@ -1,0 +1,101 @@
+[
+    {
+        "id": 11,
+        "floorid": 1,
+        "name": "兰巴赫",
+        "coordinates": "80,37",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 12,
+        "floorid": 1,
+        "name": "麦当劳",
+        "coordinates": "-31,-38",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 13,
+        "floorid": 1,
+        "name": "肯德基",
+        "coordinates": "-31,37",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 14,
+        "floorid": 1,
+        "name": "德克士",
+        "coordinates": "30,-38",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 15,
+        "floorid": 1,
+        "name": "叫了个炸鸡",
+        "coordinates": "30,37",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 16,
+        "floorid": 1,
+        "name": "西北马记拉面",
+        "coordinates": "-81,-38",
+        "doorcoordinates": "",
+        "floorname": "F1",
+        "format": "1"
+    },
+    {
+        "id": 21,
+        "floorid": 2,
+        "name": "优衣库",
+        "coordinates": "80,-38",
+        "doorcoordinates": "",
+        "floorname": "F2",
+        "format": "2"
+    },
+    {
+        "id": 22,
+        "floorid": 2,
+        "name": "BOX",
+        "coordinates": "-31,37",
+        "doorcoordinates": "",
+        "floorname": "F2",
+        "format": "2"
+    },
+    {
+        "id": 23,
+        "floorid": 2,
+        "name": "NIKE",
+        "coordinates": "-81,37",
+        "doorcoordinates": "",
+        "floorname": "F2",
+        "format": "2"
+    },
+    {
+        "id": 24,
+        "floorid": 2,
+        "name": "匡威",
+        "coordinates": "80,37",
+        "doorcoordinates": "",
+        "floorname": "F2",
+        "format": "2"
+    },
+    {
+        "id": 25,
+        "floorid": 2,
+        "name": "adidas",
+        "coordinates": "-31,-38",
+        "doorcoordinates": "",
+        "floorname": "F2",
+        "format": "2"
+    }
+]

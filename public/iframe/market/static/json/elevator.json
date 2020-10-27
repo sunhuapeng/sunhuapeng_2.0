@@ -1,0 +1,56 @@
+[
+  {
+    "id": 101,
+    "floorid": 1,
+    "name": "麦当劳扶梯",
+    "coordinates": "-1,0",
+    "doorcoordinates": "",
+    "floorname": "F1",
+    "type": 0
+  },
+  {
+    "id": 102,
+    "floorid": 1,
+    "name": "兰巴赫直梯",
+    "coordinates": "-68,10",
+    "doorcoordinates": "",
+    "floorname": "F1",
+    "type": 1
+  },
+  {
+    "id": 103,
+    "floorid": 2,
+    "name": "肯德基直梯",
+    "coordinates": "67,10",
+    "doorcoordinates": "",
+    "floorname": "F1",
+    "type": 1
+  },
+  {
+    "id": 201,
+    "floorid": 2,
+    "name": "adidas扶梯",
+    "coordinates": "-1,0",
+    "doorcoordinates": "",
+    "floorname": "F2",
+    "type": 0
+  },
+  {
+    "id": 202,
+    "floorid": 2,
+    "name": "NIKE直梯",
+    "coordinates": "-68,10",
+    "doorcoordinates": "",
+    "floorname": "F2",
+    "type": 1
+  },
+  {
+    "id": 203,
+    "floorid": 2,
+    "name": "匡威直梯",
+    "coordinates": "67,10",
+    "doorcoordinates": "",
+    "floorname": "F2",
+    "type": 1
+  }
+]
