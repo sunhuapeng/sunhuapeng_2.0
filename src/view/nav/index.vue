@@ -39,7 +39,7 @@ export default {
         {
           path: "/demo",
           name: "前端案例",
-          id: "3",
+          id: "2",
         },
         {
           path: "/gamemaze",
@@ -48,7 +48,7 @@ export default {
         },{
           path: "/market",
           name: "商场模型",
-          id: "3",
+          id: "4",
         },
       ],
     };
