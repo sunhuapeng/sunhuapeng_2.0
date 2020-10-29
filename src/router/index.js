@@ -14,6 +14,8 @@ const articlelist = () => import("@/view/articlelist/index.vue");
 const articleDetail = () => import("@/view/articledetail/index.vue");
 const market = () => import("@/view/market/index.vue");
 const gamemaze = () => import("@/view/game-maze/index.vue");
+const Demo = () => import("@/view/demo/index.vue");
+const iframe = () => import("@/view/iframe/index.vue");
 const error = () => import("@/view/error/index.vue");
 
 Vue.use(Router);
@@ -28,6 +30,11 @@ const router = new Router({
         deep: false,
       },
       component: home,
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: Demo
     },
     {
       path: "/articlelist",
@@ -60,6 +67,14 @@ const router = new Router({
         deep: false,
       },
       component: gamemaze,
+    },
+    {
+      path: "/iframe",
+      name: "iframe",
+      meta: {
+        deep: false,
+      },
+      component: iframe,
     },{
       path: '/error',
       name: 'error',

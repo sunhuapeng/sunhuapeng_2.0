@@ -1,0 +1,202 @@
+<!--
+ * @Author: sunhuapeng
+ * @Date: 2019-11-22 17:15:47
+ * @LastEditors: sunhuapeng
+ * @LastEditTime: 2020-10-13 20:03:14
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+      .label {
+        color: #fff;
+        font-family: sans-serif;
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.6);
+        transition: opacity 0.1s linear 0s;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../js/three.js"></script>
+    <script src="../js/stats.min.js"></script>
+    <script src="../js/OrbitControls.js"></script>
+    <script src="../js/CSS2DRenderer.js"></script>
+    <script>
+      var scene, camera, renderer, container;
+      var light, controls, group, stats, textgroup, labelRenderer;
+      // 点到点之间发射一条射线，检测是否经过模型
+      init();
+      animate();
+      function init() {
+        // 创建容器
+        container = document.createElement("div");
+        document.body.appendChild(container);
+        // // 创建渲染函数
+        setRender();
+
+        // 创建fps监控器
+        stats = new Stats();
+        container.appendChild(stats.dom);
+        // 创建相机
+        camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.set(25, 350, 700); //设置相机位置
+
+        // 设置鼠标操作（控制器）
+        controls = new THREE.OrbitControls(
+          camera,
+          document.querySelector("canvas")
+        );
+        controls.screenSpacePanning = true;
+        console.log(controls);
+        controls.addEventListener("change", rayText);
+        controls.update(); //更新控制器
+        // 设置场景
+        scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0xa0a0a0, 600, 3000); //雾化场景
+        scene.background = new THREE.Color(0xa0a0a0);
+
+        // 设置光照
+        light = new THREE.HemisphereLight(0xffffff, 0x444444);
+        light.position.set(0, 200, 0);
+        scene.add(light);
+        let ground = new THREE.Mesh(
+          new THREE.PlaneBufferGeometry(2000, 2000),
+          new THREE.MeshPhongMaterial({
+            color: 0x383634,
+            side: THREE.DoubleSide,
+          })
+        );
+        ground.rotation.x = -Math.PI / 2;
+        // scene.add(ground);
+        // 创建参考线
+        var axisHelper = new THREE.AxisHelper(250);
+        scene.add(axisHelper);
+        // 根据窗口自适应改变
+        window.addEventListener("resize", onWindowResize, false);
+      }
+
+      group = new THREE.Group();
+      textgroup = new THREE.Group();
+      scene.add(group);
+      scene.add(textgroup);
+      const c = 500;
+      // 创建一个低一点的盒子
+      group.add(createBox(200, 10, 100, c));
+      // 创建一个稍微高一点的盒子
+      // group.add(createBox(c / 2, c, c / 4, c));
+      // 创建一个基于两个盒子中间的文字
+      const textV3 = new THREE.Vector3(-20, 10, -50);
+      initThreeFloorName("文字", textV3);
+      const v3 = new THREE.Vector3(0, 0, 0);
+      function rayText() {
+        textgroup.children.forEach((text) => {
+          if (!text.isGroup) {
+            const opt = pointRay(camera.position, text.position, group);
+            // console.log(Number(!opt).toString())
+            text.element.style.opacity = Number(!opt).toString();
+          }
+        });
+      }
+      function pointRay(star, end, children) {
+        let nstar = star.clone(); // 克隆一个新的位置信息，这样不会影响传入的三维向量的值
+        let nend = end.clone().sub(nstar).normalize(); // 克隆一个新的位置信息，这样不会影响传入的三维向量的值
+
+        this.raycaster = new THREE.Raycaster(nstar, nend); // 创建一个正向射线
+        this.intersects = this.raycaster.intersectObjects(
+          children.children,
+          true
+        );
+        // console.log(intersects.length != 0);
+        let jclang = 0
+        let textlang = 0
+        if (intersects.length != 0) {
+          jclang = star.distanceTo(intersects[0].point)
+          textlang = star.distanceTo(end)
+        }
+        console.log(jclang<textlang)
+        return jclang<textlang;
+      }
+      function createBox(X, Y, z, w) {
+        var geometry = new THREE.BoxGeometry(w, 10, w / 2);
+        var material = new THREE.MeshLambertMaterial({ color: 0xffff00 });
+        var cube = new THREE.Mesh(geometry, material);
+        // cube.position.set(X, Y, z);
+        // cube.position.setY(40);
+        return cube;
+      }
+      function createLine(line1, line2) {
+        var points = [];
+        points.push(line1);
+        points.push(line2);
+        var material = new THREE.LineBasicMaterial({
+          color: 0x0000ff,
+        });
+        var geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+      }
+      // 创建3D世界的文字
+      function initThreeFloorName(t, p) {
+        var earthDiv = document.createElement("div");
+        earthDiv.className = "label";
+        earthDiv.textContent = t;
+        var earthLabel = new THREE.CSS2DObject(earthDiv);
+        earthLabel.position.copy(p);
+        textgroup.add(earthLabel);
+      }
+      // 重新计算尺寸
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      // 随机数
+      function random(min, max) {
+        return Math.round((Math.random() * (max - min + 1) + min) * 10) / 10;
+      }
+
+      function setRender() {
+        // 定义渲染器
+        // 定义webgl渲染器
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x26273d, 1);
+        renderer.shadowMapEnabled = true;
+        container.appendChild(renderer.domElement);
+        // document.body.appendChild(renderer.domElement);
+        // 渲染2d渲染器
+        labelRenderer = new THREE.CSS2DRenderer();
+        labelRenderer.setSize(window.innerWidth, window.innerHeight);
+        labelRenderer.domElement.style.position = "absolute";
+        labelRenderer.domElement.style.top = "0";
+        labelRenderer.domElement.style.pointerEvents = "none";
+        container.appendChild(labelRenderer.domElement);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        labelRenderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>

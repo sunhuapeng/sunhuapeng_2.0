@@ -1,0 +1,189 @@
+<!--
+ * @Author: sunhuapeng
+ * @Date: 2020-09-27 17:35:34
+ * @LastEditors: sunhuapeng
+ * @LastEditTime: 2020-10-13 20:00:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../js/three.js"></script>
+    <script src="../js/stats.min.js"></script>
+    <script src="../js/OrbitControls.js"></script>
+    <script>
+      var scene, camera, renderer, container;
+      var light, controls, meshGroup, stats;
+      var maxx = 400,
+        maxz = 240,
+        maxy = 10;
+      var points = [],
+        rayMeshArr = [];
+      var pointArr = [],
+        pointGroup = new THREE.Group();
+      var material = new THREE.LineBasicMaterial({
+        color: 0x0000ff,
+      });
+      init();
+      scene.add(pointGroup);
+      createModel();
+      animate();
+      function createModel() {
+        for (let i = 0; i < 60; i++) {
+          const mesh = createBox();
+          meshGroup.add(mesh);
+          rayMeshArr.push(mesh);
+        }
+        var geometry = new THREE.BoxGeometry(maxx, 2, maxz);
+        var material = new THREE.MeshLambertMaterial({ color: 0x0d9aff });
+        var ground = new THREE.Mesh(geometry, material);
+        ground.position.set(0, -1, 0);
+        ground.name = "ground";
+        // meshGroup.add(ground);
+        getPointVector3();
+      }
+      // 覆盖底板所有的点 提供给射线计算可行走路线用
+      function getPointVector3() {
+        for (let i = 0; i < maxx; i++) {
+          if (i % 10 === 0) {
+            for (let j = 0; j < maxz; j++) {
+              if (j % 10 === 0) {
+                const v3 = new THREE.Vector3(i - maxx / 2, 5, j - maxz / 2);
+                const flag = pointRay(v3);
+                if (flag) {
+                  points.push(...v3.toArray());
+                }
+              }
+            }
+          }
+        }
+        const point = createPoint(points);
+        scene.add(point);
+      }
+
+      function pointRay(star) {
+        const s = star.clone();
+        const e = star.clone().setY(star.y - 2000);
+        raycaster = new THREE.Raycaster(s, e.clone().normalize());
+        intersects = raycaster.intersectObjects(rayMeshArr);
+        let flag = intersects.length !== 0;
+        if(flag) {
+          // createLine(s, e);
+        }
+        return !flag
+      }
+      // 创建一条直线
+      function createLine(line1, line2) {
+        var points = [];
+        points.push(line1);
+        points.push(line2);
+        var geometry = new THREE.BufferGeometry().setFromPoints(points);
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+      }
+      // 创建随机位置的盒子
+      function createBox() {
+        const x = THREE.MathUtils.randFloatSpread(maxx - 40);
+        const y = maxy / 2;
+        const z = THREE.MathUtils.randFloatSpread(maxz - 40);
+        var geometry = new THREE.BoxGeometry(40, 4, 20);
+        var material = new THREE.MeshLambertMaterial({
+          color: 0xa0d8ff,
+          transparent: true,
+          opacity: 0.5,
+        });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.set(x, 2, z);
+        cube.updateMatrixWorld()
+        return cube;
+      }
+      // 创建点
+      function createPoint(vertices) {
+        var geometry = new THREE.BufferGeometry();
+        geometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(vertices, 3)
+        );
+
+        var material = new THREE.PointsMaterial({ color: 0xff0000 });
+
+        var points = new THREE.Points(geometry, material);
+
+        return points;
+      }
+      function init() {
+        // 创建容器
+        container = document.createElement("div");
+        document.body.appendChild(container);
+        // 创建渲染函数
+        renderer = new THREE.WebGLRenderer({
+          antialias: true, //抗锯齿
+        });
+        renderer.setPixelRatio(window.devicePixelRatio); //设置渲染的比例
+        renderer.setSize(window.innerWidth, window.innerHeight); //设置渲染的尺寸
+        container.appendChild(renderer.domElement);
+
+        // 创建fps监控器
+        stats = new Stats();
+        container.appendChild(stats.dom);
+        // 创建相机
+        camera = new THREE.PerspectiveCamera(
+          24,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.set(0, 700, 300); //设置相机位置
+
+        // 设置鼠标操作（控制器）
+        controls = new THREE.OrbitControls(
+          camera,
+          document.querySelector("canvas")
+        );
+        controls.update(); //更新控制器
+
+        // 设置场景
+        scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0xa0a0a0, 600, 3000); //雾化场景
+        scene.background = new THREE.Color(0xa0a0a0);
+
+        // 设置识别模型组
+        meshGroup = new THREE.Group();
+        scene.add(meshGroup);
+
+        // 设置光照
+        light = new THREE.HemisphereLight(0xffffff, 0x444444);
+        light.position.set(0, 200, 0);
+        scene.add(light);
+        // 创建参考线
+        var axisHelper = new THREE.AxisHelper(250);
+        scene.add(axisHelper);
+        // 根据窗口自适应改变
+        window.addEventListener("resize", onWindowResize, false);
+      }
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>

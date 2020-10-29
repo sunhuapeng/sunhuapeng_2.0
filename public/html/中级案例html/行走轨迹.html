@@ -1,0 +1,155 @@
+<!--
+ * @Author: sunhuapeng
+ * @Date: 2020-09-25 16:23:10
+ * @LastEditors: sunhuapeng
+ * @LastEditTime: 2020-10-13 20:03:49
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../js/three.js"></script>
+    <script src="../js/stats.min.js"></script>
+    <script src="../js/OrbitControls.js"></script>
+    <script>
+      var scene, camera, renderer, container;
+      var light, controls, group, stats, role;
+      init();
+      animate();
+      function init() {
+        // 创建容器
+        container = document.createElement("div");
+        document.body.appendChild(container);
+        // 创建渲染函数
+        renderer = new THREE.WebGLRenderer({
+          antialias: true, //抗锯齿
+        });
+        renderer.setPixelRatio(window.devicePixelRatio); //设置渲染的比例
+        renderer.setSize(window.innerWidth, window.innerHeight); //设置渲染的尺寸
+        container.appendChild(renderer.domElement);
+
+        // 创建fps监控器
+        stats = new Stats();
+        container.appendChild(stats.dom);
+        // 创建相机
+        camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.set(25, 350, 700); //设置相机位置
+
+        // 设置鼠标操作（控制器）
+        controls = new THREE.OrbitControls(
+          camera,
+          document.querySelector("canvas")
+        );
+        controls.update(); //更新控制器
+
+        // 设置场景
+        scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0xa0a0a0, 600, 3000); //雾化场景
+        scene.background = new THREE.Color(0xa0a0a0);
+
+        // 设置光照
+        light = new THREE.HemisphereLight(0xffffff, 0x444444);
+        light.position.set(0, 200, 0);
+        scene.add(light);
+        let ground = new THREE.Mesh(
+          new THREE.PlaneBufferGeometry(2000, 2000),
+          new THREE.MeshPhongMaterial({
+            color: 0x383634,
+            side: THREE.DoubleSide,
+          })
+        );
+        ground.rotation.x = -Math.PI / 2;
+        // scene.add(ground);
+        // 创建参考线
+        var axisHelper = new THREE.AxisHelper(250);
+        scene.add(axisHelper);
+        // 根据窗口自适应改变
+        window.addEventListener("resize", onWindowResize, false);
+        setTrail();
+      }
+      function setTrail() {
+        var radian = 0; //设置初始弧度
+        var radian_add = Math.PI / 180; //设置弧度增量
+        var points = [];
+        while (radian <= Math.PI * 2) {
+          //每增加一次弧度，绘制一条线
+          radian += radian_add;
+          let x = getX(radian);
+          let y = getY(radian);
+          points.push(new THREE.Vector3(x, 0, y));
+        }
+        createLine(points);
+        createRole(points)
+      }
+      function createRole(points) {
+        var material = new THREE.MeshNormalMaterial();
+        var geometry = new THREE.CylinderBufferGeometry(0, 5, 30, 36);
+        var mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(0, 0, 0);
+        console.log(mesh)
+        geometry.rotateX(Math.PI / 2);
+        scene.add(mesh);
+        let i=0;
+        setInterval(()=>{
+          if(i<points.length-1) {
+            mesh.position.copy(points[i])
+            const nextPoint = points[i+1]
+            if(nextPoint) {
+              mesh.lookAt(nextPoint)
+            }
+            i++
+          }
+        }, 100)
+      }
+      function createLine(points) {
+        var material = new THREE.LineBasicMaterial({
+          color: 0x0000ff,
+        });
+        var geometry = new THREE.BufferGeometry().setFromPoints(points);
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+      }
+      function getY(t) {
+        return (
+          -15 *
+          (13 * Math.cos(t) -
+            5 * Math.cos(2 * t) -
+            2 * Math.cos(3 * t) -
+            Math.cos(4 * t))
+        );
+      }
+      function getX(t) {
+        return 15 * (16 * Math.pow(Math.sin(t), 3));
+      }
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>

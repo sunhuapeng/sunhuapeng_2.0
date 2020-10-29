@@ -27,7 +27,7 @@ export default {
     return {
       showLoading: false,
       keepList: ["art-list"],
-      noNav: ['/articledetail', '/market', '/gamemaze', '/error']
+      noNav: ['/articledetail', '/market', '/gamemaze', '/error', '/iframe']
     };
   },
   mounted() {

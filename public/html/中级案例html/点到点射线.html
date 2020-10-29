@@ -1,0 +1,147 @@
+<!--
+ * @Author: sunhuapeng
+ * @Date: 2020-09-28 14:07:13
+ * @LastEditors: sunhuapeng
+ * @LastEditTime: 2020-10-13 20:00:39
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../js/three.js"></script>
+    <script src="../js/stats.min.js"></script>
+    <script src="../js/OrbitControls.js"></script>
+    <script>
+      var scene, camera, renderer, container;
+      var light, controls, group, stats;
+      var material = new THREE.LineBasicMaterial({
+        color: 0x0000ff,
+      });
+
+      init();
+      animate();
+
+      const mesh = createBox();
+      mesh.position.setX(60);
+      mesh.updateMatrixWorld()
+      scene.add(mesh);
+      const mesh2 = createBox();
+      mesh2.position.setX(-60);
+      mesh2.updateMatrixWorld()
+      scene.add(mesh2);
+
+      for (let x = -140; x < 140; x++) {
+        for (let y = -70; y < 70; y++) {
+          if (x % 2 === 0 && y % 2 === 0) {
+            const star = new THREE.Vector3(x, 5, y);
+            pointRay(star);
+          }
+        }
+      }
+
+      function pointRay(star) {
+        const s = star.clone();
+        const e = star.clone().setY(star.y-12);
+        this.raycaster = new THREE.Raycaster(s, e.clone().normalize());
+        this.intersects = this.raycaster.intersectObjects([mesh,mesh2]);
+        if (intersects.length != 0) {
+          // console.log(s.x,e.x)
+          createLine(s, e);
+        }
+        // console.log(intersects.length)
+        return intersects.length != 0;
+      }
+      // 创建一条直线
+      function createLine(line1, line2) {
+        var points = [];
+        points.push(line1);
+        points.push(line2);
+        var geometry = new THREE.BufferGeometry().setFromPoints(points);
+        var line = new THREE.Line(geometry, material);
+        scene.add(line);
+      }
+      // 创建随机位置的盒子
+      function createBox() {
+        var geometry = new THREE.BoxGeometry(100, 10, 100);
+        var material = new THREE.MeshLambertMaterial({
+          color: 0xa0d8ff,
+          transparent: true,
+          opacity: 0.5,
+        });
+        var cube = new THREE.Mesh(geometry, material);
+        return cube;
+      }
+      function init() {
+        // 创建容器
+        container = document.createElement("div");
+        document.body.appendChild(container);
+        // 创建渲染函数
+        renderer = new THREE.WebGLRenderer({
+          antialias: true, //抗锯齿
+        });
+        renderer.setPixelRatio(window.devicePixelRatio); //设置渲染的比例
+        renderer.setSize(window.innerWidth, window.innerHeight); //设置渲染的尺寸
+        container.appendChild(renderer.domElement);
+
+        // 创建fps监控器
+        stats = new Stats();
+        container.appendChild(stats.dom);
+        // 创建相机
+        camera = new THREE.PerspectiveCamera(
+          45,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.set(200, 100, 200); //设置相机位置
+
+        // 设置鼠标操作（控制器）
+        controls = new THREE.OrbitControls(
+          camera,
+          document.querySelector("canvas")
+        );
+        controls.update(); //更新控制器
+
+        // 设置场景
+        scene = new THREE.Scene();
+        // scene.fog = new THREE.Fog(0xa0a0a0, 600, 3000); //雾化场景
+        scene.background = new THREE.Color(0xa0a0a0);
+        group = new THREE.Group();
+        scene.add(group);
+        // 设置光照
+        light = new THREE.HemisphereLight(0xffffff, 0x444444);
+        light.position.set(0, 200, 0);
+        scene.add(light);
+        // 创建参考线
+        var axisHelper = new THREE.AxisHelper(250);
+        scene.add(axisHelper);
+        // 根据窗口自适应改变
+        window.addEventListener("resize", onWindowResize, false);
+      }
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
