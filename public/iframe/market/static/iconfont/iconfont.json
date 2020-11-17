@@ -1,0 +1,65 @@
+{
+  "id": "2208237",
+  "name": "market",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13901346",
+      "name": "路线",
+      "font_class": "ziyuan",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "2569880",
+      "name": "阅读",
+      "font_class": "yuedu",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "12097374",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "1788970",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "10559070",
+      "name": "楼层",
+      "font_class": "louceng",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "15258703",
+      "name": "店铺",
+      "font_class": "dianpu",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "17950859",
+      "name": "044建筑",
+      "font_class": "044jianzhu",
+      "unicode": "e87d",
+      "unicode_decimal": 59517
+    },
+    {
+      "icon_id": "17984171",
+      "name": "关  闭",
+      "font_class": "guanbi",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    }
+  ]
+}

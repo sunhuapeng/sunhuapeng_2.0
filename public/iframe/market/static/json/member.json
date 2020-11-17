@@ -6,7 +6,7 @@
         "coordinates": "80,37",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 12,
@@ -15,7 +15,7 @@
         "coordinates": "-31,-38",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 13,
@@ -24,7 +24,7 @@
         "coordinates": "-31,37",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 14,
@@ -33,7 +33,7 @@
         "coordinates": "30,-38",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 15,
@@ -42,7 +42,7 @@
         "coordinates": "30,37",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 16,
@@ -51,7 +51,7 @@
         "coordinates": "-81,-38",
         "doorcoordinates": "",
         "floorname": "F1",
-        "format": "1"
+        "format": "餐饮"
     },
     {
         "id": 21,
@@ -60,7 +60,7 @@
         "coordinates": "80,-38",
         "doorcoordinates": "",
         "floorname": "F2",
-        "format": "2"
+        "format": "服装"
     },
     {
         "id": 22,
@@ -69,7 +69,7 @@
         "coordinates": "-31,37",
         "doorcoordinates": "",
         "floorname": "F2",
-        "format": "2"
+        "format": "服装"
     },
     {
         "id": 23,
@@ -78,7 +78,7 @@
         "coordinates": "-81,37",
         "doorcoordinates": "",
         "floorname": "F2",
-        "format": "2"
+        "format": "服装"
     },
     {
         "id": 24,
@@ -87,7 +87,7 @@
         "coordinates": "80,37",
         "doorcoordinates": "",
         "floorname": "F2",
-        "format": "2"
+        "format": "服装"
     },
     {
         "id": 25,
@@ -96,6 +96,6 @@
         "coordinates": "-31,-38",
         "doorcoordinates": "",
         "floorname": "F2",
-        "format": "2"
+        "format": "服装"
     }
 ]
