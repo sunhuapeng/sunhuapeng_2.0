@@ -48,7 +48,7 @@ export default {
     };
   },
   mounted() {
-    this.$loading.open()
+    // this.$loading.open()
     this.$readFile.init(() => {
       this.articleId = this.$route.query.id;
       this.articleObj = this.$readFile.getArticleById(this.articleId);
@@ -63,7 +63,7 @@ export default {
       import(`../../../public/md/${this.articleName}.md`).then((res) => {
         this.article = res.default
         this.$nextTick(()=>{
-          this.$loading.close()
+          // this.$loading.close()
         })
       });
     },

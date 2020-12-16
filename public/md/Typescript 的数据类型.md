@@ -5,7 +5,7 @@
     <p class="tag" style="display:none;">前端|原创</p>
 </html>
 <html>
-    <p class="coverPic" style="display:none;">http://n.sinaimg.cn/sinacn11/680/w400h280/20180511/263d-hamfahw1625944.jpg</p>
+    <p class="coverPic" style="display:none;">http://chuantu.xyz/t6/741/1605668666x-1224475230.png</p>
 </html>
 <html>
    <p class="reprint" style="display:none;"></p>

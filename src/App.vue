@@ -31,18 +31,12 @@ export default {
     };
   },
   mounted() {
-    this.$loading.open();
+    // this.$loading.open();
     document.onreadystatechange = () => {
       if (document.readyState == "complete") {
-        console.log("加载完毕");
-        this.$loading.close();
+        // this.$loading.close();
       }
     };
-    // new ReadFile();
-    // this.$loading.open()
-    // setTimeout(()=>{
-    //   this.$loading.close()
-    // }, 2000)
   },
   computed: {
     getLoading() {
