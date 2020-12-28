@@ -64,27 +64,32 @@
         scene.background = new THREE.Color(0xf65144);
 
         // 设置光照
-        // 全局光
-        // const ambientLight = new THREE.AmbientLight(0xffffff); // soft white light
-        // scene.add(ambientLight);
-        // 平行光
-        // const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        // scene.add(directionalLight);
+        // 半球光
         const hemisphereLight = new THREE.HemisphereLight(
-          0xffffff,
-          0x444444,
-          1
+          0xffaea8, // 天空发出颜色
+          0x7f0900, // 地面发出颜色
+          1 // 光照强度
         );
-        // hemisphereLight.position.set(0, 200, 0);
+        hemisphereLight.position.set(0, 50, 60);
         scene.add(hemisphereLight);
 
-        light = new THREE.PointLight(0xffff00, 2, 100);
+        // 聚光灯
+        const spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(100, 60, 100);
+        scene.add(spotLight);
+        // 聚光灯辅助线
+        // const spotLightHelper = new THREE.SpotLightHelper(spotLight);
+        // scene.add(spotLightHelper);
+
+         // 点光源
+        light = new THREE.PointLight(0xffff00, 1, 100);
         light.position.set(0, 0, 0);
         scene.add(light);
 
         // 创建参考线
         // var axisHelper = new THREE.AxisHelper(250);
         // scene.add(axisHelper);
+
         // 根据窗口自适应改变
         window.addEventListener("resize", onWindowResize, false);
       }
@@ -99,38 +104,26 @@
         const time = Date.now() * 0.0005;
         if (light) {
           light.position.x = Math.sin(time * 0.7) * 50;
-          // light.position.y = Math.cos(time * 0.3) * 50;
           light.position.z = Math.sin(time * 0.5) * 50;
         }
         renderer.render(scene, camera);
       }
 
-      function loadModel() {}
-      new THREE.FBXLoader().load(
-        "../model/fbx/beats耳机/source/beats_highpoly.fbx",
-        function (loadedModel) {
-          console.log(loadedModel);
-          var textureLoader = new THREE.TextureLoader();
-          var textureNormal = textureLoader.load(
-            "../model/fbx/beats耳机/textures/beats_red.png"
-          );
-          var material = new THREE.MeshPhongMaterial({
-            combine: 0,
-            map: textureNormal, //法线贴图
-            //设置深浅程度，默认值(1,1)。
-            normalScale: new THREE.Vector2(10, 10),
-            reflectivity: 0,
-          }); //材质对象Material
-          mesh = loadedModel.children[0];
-          // mesh.material = material;
-          mesh.material = material;
-          console.log(mesh.material);
-
+      function loadModel() {
+        // 模型地址
+        const url = "../model/fbx/beats耳机/source/beats_highpoly.fbx";
+        const loader = new THREE.FBXLoader();
+        loader.load(url, function (loadedModel) {
+          const textureLoader = new THREE.TextureLoader();
+          const textureUrl = "../model/fbx/beats耳机/textures/beats_red.png";
+          const textureNormal = textureLoader.load(textureUrl);
+          mesh = loadedModel.children[0].clone();
+          mesh.material.map = textureNormal;
+          mesh.material.shininess = 15;
+          console.log(loadedModel.children[0]);
           scene.add(mesh);
-          // var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-          // scene.add(mesh); //网格模型添加到场景中
-        }
-      );
+        });
+      }
     </script>
   </body>
 </html>
