@@ -43,17 +43,74 @@
         cursor: pointer;
         z-index: 999;
       }
-      #mark{
+      #mark {
         width: 100%;
         height: 100vh;
-        background: rgba(0,0,0,0.2);
+        background: rgba(0, 0, 0, 0.2);
         position: absolute;
         top: 0;
         left: 0;
       }
+      .links {
+        position: fixed;
+        top: 50px;
+        left: 50px;
+        z-index: 2;
+      }
+      a {
+        display: inline-block;
+        color: #ffffff;
+        font-size: 12px;
+      }
+
+      .start-text {
+        position: fixed;
+        z-index: 3;
+        bottom: 5px;
+        text-align: center;
+        color: #ffffff;
+        width: 100%;
+        font-size: 12px;
+      }
+      .start-text span {
+        color: yellow;
+      }
+      @media screen and (max-width: 800px) {
+        .links,.qr-code {
+          display: none;
+        }
+      }
+      .qr-code{
+        position: fixed;
+        bottom: 5px;
+        right: 10px;
+        z-index: 4;
+        width: 80px;
+        height: 80px;
+      }
     </style>
   </head>
   <body>
+    <div class="links">
+      <a href="https://juejin.cn/post/6911909496050843655" target="_blank"
+        >初始化游戏</a
+      ><br />
+      <a href="https://juejin.cn/post/6911947391369216013" target="_blank"
+        >控制主角移动以及停止</a
+      ><br />
+      <a href="https://juejin.cn/post/6912306652632842247" target="_blank"
+        >切割等功能</a
+      ><br />
+      <a href="https://juejin.cn/post/6912362707928907790" target="_blank"
+        >结束判定，记分器等</a
+      >
+    </div>
+    <div class="qr-code">
+      <canvas width="80" height="80" id="qr-code"></canvas>
+    </div>
+    <p class="start-text">
+      <span>Click</span> or press the <span>space bar</span> to start the game
+    </p>
     <div id="fraction">0</div>
     <div id="mark">
       <div id="start-game">start</div>

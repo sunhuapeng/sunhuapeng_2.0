@@ -13,9 +13,37 @@
       body {
         overflow: hidden;
       }
+      #pi {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        /* background: rgba(255, 149, 149, 0.6); */
+        overflow: hidden;
+        overflow-y: auto;
+        color: #ffffff;
+        word-wrap: break-word;
+      }
+      a {
+        position:fixed;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        color: #ffffff;
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
+    <a href="https://juejin.cn/post/6940157771648073758" target="_blank">
+      文章地址
+    </a>
+    <div id="pi">
+
+    </div>
     <script src="../js/three.js"></script>
     <script src="../js/stats.min.js"></script>
     <script src="../js/OrbitControls.js"></script>
@@ -23,6 +51,8 @@
     <script>
       var scene, camera, renderer, container;
       var light, controls, group, stats;
+      const pie = document.getElementById('pi')
+      var str = ''
       init();
       animate();
       function init() {
@@ -39,7 +69,7 @@
 
         // 创建fps监控器
         stats = new Stats();
-        container.appendChild(stats.dom);
+        // container.appendChild(stats.dom);
         // 创建相机
         camera = new THREE.PerspectiveCamera(
           160,
@@ -66,15 +96,10 @@
         scene.add(light);
 
         // 创建参考线
-        var axisHelper = new THREE.AxisHelper(250);
-        scene.add(axisHelper);
+        // var axisHelper = new THREE.AxisHelper(250);
+        // scene.add(axisHelper);
         // 根据窗口自适应改变
         window.addEventListener("resize", onWindowResize, false);
-
-        // var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        // var cube = new THREE.Mesh(geometry, material);
-        // scene.add(cube);
       }
       function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -92,18 +117,14 @@
       let v3 = new THREE.Vector3();
       let lastV3 = new THREE.Vector3();
       let i = 0;
-      console.log(pi.length);
-
-      // pi = "3141";
       let tag = true
       if (tag) {
         let s = setInterval(() => {
           comLine(i, s);
           i++;
-        }, 10);
+        }, 50);
       } else {
         for (let j = 0; j < pi.length; j++) {
-          console.log(pi[j]);
           comLine(j);
         }
       }
@@ -158,7 +179,16 @@
 
         scene.add(line);
       }
+      
       function drawLine(n, v3) {
+        str+=n
+        if(pie) {
+          pie.innerHTML = `
+            <div>
+              ${str}  
+            </div>
+          `
+        }
         v3 = v3 || new THREE.Vector3();
         var R = 10; //圆弧半径
         var N = 36; //分段数量
